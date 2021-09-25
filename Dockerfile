@@ -2,7 +2,7 @@ FROM ruby:2.6.6-alpine
 
 RUN apk update \
     && apk upgrade \
-    && apk add --update --no-cache \
+    && apk add --update --no-cache shared-mime-info \
     build-base curl-dev git \
     yaml-dev zlib-dev nodejs yarn mariadb-dev \
     tzdata bash

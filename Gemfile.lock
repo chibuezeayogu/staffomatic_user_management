@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: a46a84145c33e9319c8ad1cc5c88ea2ccac525d5
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,19 +68,45 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.16)
     bootsnap (1.7.0)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
-    concurrent-ruby (1.1.8)
+    concurrent-ruby (1.1.9)
     crass (1.0.6)
+    database_cleaner (2.0.1)
+      database_cleaner-active_record (~> 2.0.0)
+    database_cleaner-active_record (2.0.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     diff-lcs (1.4.4)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     ffi (1.14.2)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
-    i18n (1.8.8)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
+    globalid (0.5.2)
+      activesupport (>= 5.0)
+    http (5.0.2)
+      addressable (~> 2.8)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      llhttp-ffi (~> 0.4.0)
+    http-cookie (1.0.4)
+      domain_name (~> 0.5)
+    http-form_data (2.3.0)
+    i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jsonapi-serializer (2.1.0)
       activesupport (>= 4.2)
@@ -84,7 +118,10 @@ GEM
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.9.0)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
+    loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -92,16 +129,25 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.5)
-    mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
-    minitest (5.14.3)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
+    mini_mime (1.1.1)
+    mini_portile2 (2.6.1)
+    minitest (5.14.4)
     msgpack (1.4.2)
     mysql2 (0.5.3)
     nio4r (2.5.4)
-    nokogiri (1.11.1)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.12.4)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    noticed (1.4.1)
+      http (>= 4.0.0)
+      rails (>= 5.2.0)
+    paper_trail (12.1.0)
+      activerecord (>= 5.2)
+      request_store (~> 1.1)
+    public_suffix (4.0.6)
     puma (5.2.0)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -126,7 +172,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.3.0)
+    rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     railties (6.1.1)
       actionpack (= 6.1.1)
@@ -134,7 +180,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (~> 1.0)
-    rake (13.0.3)
+    rake (13.0.6)
     ransack (2.4.2)
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
@@ -142,6 +188,8 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    request_store (1.5.0)
+      rack (>= 1.4)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -170,6 +218,9 @@ GEM
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -182,10 +233,15 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.4.4)
   byebug
+  database_cleaner
+  factory_bot_rails
+  faker!
   jsonapi.rb
   jwt
   listen (~> 3.3)
   mysql2 (~> 0.5)
+  noticed (~> 1.4)
+  paper_trail
   puma (~> 5.0)
   rails (~> 6.1.1)
   rspec-rails (~> 4.0.2)
@@ -196,4 +252,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.1.4
+   2.2.10
