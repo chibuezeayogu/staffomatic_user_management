@@ -1,20 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  let(:user) do
-    User.create(
-      email: 'danie@example.com',
-      password: 'supersecurepassword',
-      password_confirmation: 'supersecurepassword',
-    )
+  let(:headers) do
+    {
+      'Authentication' => "Bearer #{auth_token}",
+      'Content-Type' => 'application/json'
+    }
   end
-  let(:auth_token) { authenticate_user(user) }
-  let(:headers) { { 'Authentication' => "Bearer #{auth_token}" } }
-  let!(:users) { create_list(:user, 5) }
 
   describe 'when user is not authenticated' do
     it 'returns error message' do
-      get user_path(user), headers: {}
+      get user_path(auth_user), headers: {}
 
       expect(json['message']).to eq 'Please log in'
     end
@@ -56,10 +52,10 @@ RSpec.describe 'Users', type: :request do
 
     context 'when user is authenticated and provides a user id' do
       it 'returns the user' do
-        get user_path(user), headers: headers
+        get user_path(auth_user), headers: headers
 
         expect(response).to have_http_status(:success)
-        expect(json['data']['id']).to eq user.id.to_s
+        expect(json['data']['id']).to eq auth_user.id.to_s
       end
     end
   end
@@ -67,7 +63,7 @@ RSpec.describe 'Users', type: :request do
   describe 'PUT /users/:id' do
     context 'when a user tries to archive/unarchive/delete his/her account' do
       it 'returns error message' do
-        put user_path(user), headers: headers
+        put user_path(auth_user), headers: headers
 
         expect(response).to have_http_status(:forbidden)
         expect(json['message']).to eq 'You cannot archive/unarchive/delete your account'
@@ -78,8 +74,7 @@ RSpec.describe 'Users', type: :request do
       it 'should archive the user' do
         put user_path(users.first),
             headers: headers,
-            params: { user: { archived: true } }
-
+            params: { user: { archived: true } }.to_json
         expect(response).to have_http_status(:success)
         expect(json['data']['attributes']['archived']).to eq true
         expect(json['data']['attributes']['user_updates']).not_to be_empty

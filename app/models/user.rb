@@ -4,5 +4,5 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
-  scope :apply_filters, ->(params) { where(params) }
+  scope :apply_filters, ->(filters) { where(filters) }
 end
