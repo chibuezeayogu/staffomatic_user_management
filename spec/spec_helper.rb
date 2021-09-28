@@ -14,6 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'support/request_spec_helper'
+require 'shared/user_authentication'
 
 RSpec.configure do |config|
   config.include RequestSpecHelper
@@ -97,4 +98,5 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  config.include_context 'user_authentication'
 end

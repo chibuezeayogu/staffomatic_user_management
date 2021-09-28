@@ -19,6 +19,13 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# allow an auto-generating body response
+if Rails.env.test?
+  RSpec.configure do |config|
+    config.swagger_dry_run = false
+  end
+end
+
 module StaffomaticUserManagement
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

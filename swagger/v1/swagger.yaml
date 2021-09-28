@@ -1,0 +1,95 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/users":
+    get:
+      summary: list users
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: Authentication
+        in: header
+        description: Client token
+        schema:
+          type: string
+      - name: archived
+        in: query
+        description: Archived filter value true/false
+        schema:
+          type: string
+      - name: deleted
+        in: query
+        description: Deleted filter value true/false
+        schema:
+          type: string
+      responses:
+        '401':
+          description: unauthorized
+        '200':
+          description: successful
+  "/users/{id}":
+    get:
+      summary: show user
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: Authentication
+        in: header
+        description: Client token
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update user
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: Authentication
+        in: header
+        description: Client token
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/user_update"
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3189
+components:
+  securitySchemes:
+    bearer_auth:
+      type: apiKey
+      scheme: bearer
+      name: Authentication
+      require: true
+  user_update:
+    type: object
+    properties:
+      archived:
+        type: boolean
+      disabled:
+        type: boolean

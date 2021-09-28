@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysql:
-    image: mysql:5.6.47
+    image: mysql:8.0
     restart: always
     ports:
       - 3306:3306
@@ -12,7 +12,7 @@ services:
       - db_data:/var/lib/mysql
   api:
     build: .
-    command: bash -c "bundle install; bundle exec rails s -p 3189 -b 0.0.0.0"
+    command: bash -c "bundle install; rm -f tmp/pids/server.pid && bundle exec rails s -p 3189 -b '0.0.0.0'"
     volumes:
       - .:/app
     ports:
