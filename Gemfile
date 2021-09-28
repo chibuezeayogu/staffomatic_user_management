@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 gem 'rails', '~> 6.1.1'
-gem 'mysql2', '~> 0.5'
+gem 'mysql2', '~> 0.5.3'
 gem 'puma', '~> 5.0'
 
 # Use Active Model has_secure_password

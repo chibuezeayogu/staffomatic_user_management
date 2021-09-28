@@ -12,7 +12,6 @@ RSpec.describe 'users', type: :request do
       parameter name: :archived, in: :query, type: :string, description: 'Archived filter value true/false'
       parameter name: :deleted, in: :query, type: :string, description: 'Deleted filter value true/false'
 
-
       response(401, 'unauthorized') do
         let(:Authentication) { 'Bearer' }
 

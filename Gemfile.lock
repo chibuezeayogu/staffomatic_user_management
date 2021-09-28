@@ -252,7 +252,7 @@ DEPENDENCIES
   jsonapi.rb
   jwt
   listen (~> 3.3)
-  mysql2 (~> 0.5)
+  mysql2 (~> 0.5.3)
   noticed (~> 1.4)
   paper_trail
   puma (~> 5.0)

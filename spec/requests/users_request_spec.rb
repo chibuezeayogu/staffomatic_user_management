@@ -61,6 +61,8 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'PUT /users/:id' do
+    let(:user) { users.first }
+
     context 'when a user tries to archive/unarchive/delete his/her account' do
       it 'returns error message' do
         put user_path(auth_user), headers: headers
@@ -72,7 +74,7 @@ RSpec.describe 'Users', type: :request do
 
     context 'when a user tries to archive another users account' do
       it 'should archive the user' do
-        put user_path(users.first),
+        put user_path(user),
             headers: headers,
             params: { user: { archived: true } }.to_json
         expect(response).to have_http_status(:success)
